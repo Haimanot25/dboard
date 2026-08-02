@@ -17,16 +17,16 @@ Connect PostgreSQL, MySQL, MongoDB, SQLite, or Supabase — describe what you wa
 
 <!-- Replace these placeholders with actual screenshots -->
 
-![Dashboard](./docs/screenshot-dashboard.png)
+![Dashboard](./public/ss/screenshot-dashboard.png)
 *Dashboard with charts, metrics, and real-time data*
 
-![Query Editor](./docs/screenshot-query-editor.png)
+![Query Editor](./public/ss/screenshot-query-editor.png)
 *SQL query editor with syntax highlighting and saved queries*
 
-![DB Monitor](./docs/screenshot-db-monitor.png)
+![DB Monitor](./public/ss/screenshot-db-monitor.png)
 *Database monitoring with live metrics and table inventory*
 
-![Schema Diff](./docs/screenshot-schema-diff.png)
+![Schema Diff](./public/ss/screenshot-schema-diff.png)
 *Schema comparison between two databases*
 
 ---
