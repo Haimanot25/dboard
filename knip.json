@@ -1,0 +1,5 @@
+{
+  "entry": ["src/app/**/page.tsx", "src/app/**/layout.tsx", "src/app/api/**/route.ts"],
+  "ignore": ["src/generated/**"],
+  "ignoreDependencies": ["@types/exceljs"]
+}

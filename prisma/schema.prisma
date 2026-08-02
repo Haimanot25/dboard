@@ -1,0 +1,324 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String?
+  role      String   @default("editor")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  connections      Connection[]
+  queryHistory     QueryHistory[]
+  apiKeys          ApiKey[]
+  auditLogs        AuditLog[]
+  sharedWithMe     ConnectionShare[] @relation("SharedWithMe")
+  connectionShares ConnectionShare[] @relation("SharedByMe")
+  dashboardSharesByMe   DashboardShare[] @relation("DashSharedByMe")
+  dashboardSharesWithMe DashboardShare[] @relation("DashSharedWithMe")
+  dashboards       Dashboard[]
+  adminPages       AdminPage[]
+  savedViews       SavedView[]
+  alerts           Alert[]
+  aiProviders      AiProvider[]
+  favorites        Favorite[]
+}
+
+model Connection {
+  id                String   @id @default(cuid())
+  name              String
+  type              String   @default("postgresql")
+  host              String   @default("localhost")
+  port              Int      @default(5432)
+  database          String
+  username          String
+  encryptedPassword String?
+  ssl               Boolean  @default(false)
+  readOnly          Boolean  @default(false)
+  poolMin           Int      @default(0)
+  poolMax           Int      @default(10)
+  poolIdleTimeout   Int      @default(30000)
+  queryTimeoutMs    Int      @default(30000)
+  userId            String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user         User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  schemaConfig SchemaConfig?
+  queryHistory QueryHistory[]
+  apiKeys      ApiKey[]
+  auditLogs    AuditLog[]
+  webhooks     Webhook[]
+  shares       ConnectionShare[] @relation("SharedConnection")
+  alerts       Alert[]
+   adminPages   AdminPage[]
+   charts       DashboardChart[]
+   savedViews   SavedView[]
+
+   @@index([userId])
+}
+
+model SchemaConfig {
+  id           String   @id @default(cuid())
+  connectionId String   @unique
+  config       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  connection Connection @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+}
+
+model QueryHistory {
+  id           String   @id @default(cuid())
+  connectionId String
+  userId       String
+  sql          String
+  durationMs   Int      @default(0)
+  rowCount     Int      @default(0)
+  error        String?
+  saved        Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  connection Connection @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([connectionId])
+}
+
+model ApiKey {
+  id           String    @id @default(cuid())
+  name         String
+  key          String    @unique
+  lastChars    String
+  permissions  String    @default("read")
+  connectionId String
+  userId       String
+  expiresAt    DateTime?
+  lastUsedAt   DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  connection Connection @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([connectionId])
+  @@index([userId])
+}
+
+model AuditLog {
+  id           String   @id @default(cuid())
+  connectionId String
+  userId       String
+  action       String
+  tableName    String?
+  recordId     String?
+  details      String?
+  ip           String?
+  dashboardId  String?
+  createdAt    DateTime @default(now())
+
+  connection Connection @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([connectionId])
+  @@index([userId])
+  @@index([dashboardId])
+}
+
+model Webhook {
+  id           String   @id @default(cuid())
+  name         String
+  url          String
+  events       String   @default("row.created,row.updated,row.deleted")
+  connectionId String
+  enabled      Boolean  @default(true)
+  secret       String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  connection Connection @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+
+  @@index([connectionId])
+}
+
+model ConnectionShare {
+  id           String   @id @default(cuid())
+  connectionId String
+  sharedWithId String
+  sharedById   String
+  permission   String   @default("read")
+  createdAt    DateTime @default(now())
+
+  connection Connection @relation(fields: [connectionId], references: [id], onDelete: Cascade, name: "SharedConnection")
+  sharedWith User       @relation(fields: [sharedWithId], references: [id], onDelete: Cascade, name: "SharedWithMe")
+  sharedBy   User       @relation(fields: [sharedById], references: [id], onDelete: Cascade, name: "SharedByMe")
+
+  @@unique([connectionId, sharedWithId])
+  @@index([sharedById])
+}
+
+model Dashboard {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user   User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  charts DashboardChart[]
+  shares DashboardShare[]
+
+  @@index([userId])
+}
+
+model DashboardShare {
+  id           String   @id @default(cuid())
+  dashboardId  String
+  sharedWithId String
+  sharedById   String
+  permission   String   @default("read")
+  createdAt    DateTime @default(now())
+
+  dashboard  Dashboard @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
+  sharedWith User      @relation(fields: [sharedWithId], references: [id], onDelete: Cascade, name: "DashSharedWithMe")
+  sharedBy   User      @relation(fields: [sharedById], references: [id], onDelete: Cascade, name: "DashSharedByMe")
+
+  @@unique([dashboardId, sharedWithId])
+  @@index([sharedById])
+}
+
+model DashboardChart {
+  id           String   @id @default(cuid())
+  dashboardId  String
+  title        String
+  type         String   @default("bar")
+  connectionId String
+  query        String
+  config       String   @default("{}")
+  width        Int      @default(1)
+  height       Int      @default(1)
+  x            Int      @default(0)
+  y            Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  dashboard Dashboard @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
+  connection Connection @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+
+  @@index([dashboardId])
+  @@index([connectionId])
+}
+
+model SavedView {
+  id           String   @id @default(cuid())
+  name         String
+  connectionId String
+  tableName    String
+  config       String
+  userId       String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  connection Connection @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([connectionId])
+}
+
+model AiProvider {
+  id              String   @id @default(cuid())
+  userId          String
+  name            String   @default("chatgpt")
+  displayName     String   @default("ChatGPT / OpenAI")
+  encryptedApiKey String?
+  baseUrl         String?
+  isEnabled       Boolean  @default(true)
+  sortOrder       Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  models AiModel[]
+
+  @@unique([userId, name])
+  @@index([userId])
+}
+
+model AiModel {
+  id          String   @id @default(cuid())
+  providerId  String
+  modelId     String
+  displayName String
+  isDefault   Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  provider AiProvider @relation(fields: [providerId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, modelId])
+  @@index([providerId])
+}
+
+model Alert {
+  id              String    @id @default(cuid())
+  name            String
+  connectionId    String
+  tableName       String
+  condition       String
+  enabled         Boolean   @default(true)
+  webhookUrl      String?
+  email           String?
+  lastTriggeredAt DateTime?
+  userId          String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  connection Connection @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([connectionId])
+}
+
+model AdminPage {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  userId       String
+  connectionId String
+  config       String   @default("{}")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  connection Connection @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([connectionId])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  kind      String
+  targetId  String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, kind, targetId])
+  @@index([userId])
+  @@index([kind, targetId])
+}

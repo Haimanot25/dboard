@@ -1,0 +1,24 @@
+title = "DBoard gitleaks config"
+
+[allowlist]
+  description = "Global allowlist"
+  paths = [
+    '''tests/''',
+    '''node_modules/''',
+    '''src/generated/''',
+    '''\.env\.example$''',
+    '''vitest\.config\.ts$''',
+    '''playwright\.config\.ts$''',
+  ]
+
+[[rules]]
+  id = "nextauth-secret-placeholder"
+  description = "NextAuth secret placeholder"
+  regex = '''NEXTAUTH_SECRET\s*=\s*["']?(test|ci|change-me|generate-with)[\w-]*["']?'''
+  tags = ["key", "nextauth"]
+
+[[rules]]
+  id = "encryption-key-placeholder"
+  description = "Encryption key placeholder"
+  regex = '''ENCRYPTION_KEY\s*=\s*["']?(test|ci|change-me|generate-with)[\w-]*["']?'''
+  tags = ["key", "encryption"]
