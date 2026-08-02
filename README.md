@@ -1,13 +1,15 @@
 # DBoard
 
-**Open-source multi-database management platform**
+**Build admin panels and dashboards for any database — zero code, AI-powered.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![CI](https://github.com/dboard/dboard/actions/workflows/ci.yml/badge.svg)](https://github.com/dboard/dboard/actions)
 [![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue.svg)](https://typescriptlang.org)
 
-DBoard is a self-hosted, open-source platform for managing multiple databases from a single interface. Connect to PostgreSQL, MySQL, SQLite, MongoDB, Supabase, or SQL Server — browse data, run queries, monitor performance, and collaborate with your team.
+DBoard connects to your existing database and uses AI to instantly generate admin panels, dashboards, forms, and queries from a simple natural language prompt. No coding required.
+
+Connect PostgreSQL, MySQL, MongoDB, SQLite, or Supabase — describe what you want in plain English — and DBoard builds it. Edit rows with validated forms, visualize data with auto-generated charts, run queries with a built-in SQL console, and share dashboards with your team.
 
 ---
 
@@ -31,20 +33,20 @@ DBoard is a self-hosted, open-source platform for managing multiple databases fr
 
 ## Features
 
-- **Multi-Database Support** — Connect to PostgreSQL, MySQL, SQLite, MongoDB, Supabase, and SQL Server from a single interface
-- **Unified Dashboard** — Create custom dashboards with drag-and-drop chart widgets, auto-refresh, and date range filtering
-- **SQL Query Editor** — Write and execute queries with format SQL, saved queries, query history, and AI-powered generation
-- **AI Integration** — Generate SQL from natural language, auto-create dashboards and admin panels using OpenAI, Groq, Gemini, Ollama, or OpenRouter
-- **Schema Management** — Introspect database schemas, compare schemas across connections, and configure column-level metadata
-- **Data Import/Export** — Import CSV, JSON, and JSONL files; export to CSV, JSON, JSONL, Excel, and PDF
-- **Real-time Monitoring** — Monitor database health, table row counts, sizes, cache hit ratios, and connection states
-- **Admin Pages** — Build custom admin panels with configurable tables, filters, and actions
-- **Sharing & Collaboration** — Share connections and dashboards with team members using read/write/admin permissions
-- **Webhooks** — Send real-time notifications to Slack, Discord, PagerDuty, or custom HTTP endpoints on data changes
+- **Zero-Code Admin Panels** — Generate full CRUD interfaces from a natural language prompt — no templates, no configuration
+- **AI-Powered Dashboards** — "Show me monthly revenue by product category" → instant chart with no SQL needed
+- **Multi-Database** — Connect PostgreSQL, MySQL, SQLite, MongoDB, Supabase, or SQL Server through one unified interface
+- **Database-First** — Works with your existing database. No data migration, no vendor lock-in, no schema redesign
+- **SQL Console** — Write and execute queries with syntax highlighting, saved queries, history, and AI-powered generation
+- **Data Grid** — Browse, search, filter, sort, inline edit, bulk delete, and import/export (CSV, JSON, Excel, PDF)
+- **Schema Diff** — Compare schemas across two databases and visualize differences instantly
+- **DB Monitor** — Real-time health checks, table inventory, row counts, and performance metrics
+- **Sharing & Collaboration** — Share connections and dashboards with read/write/admin permissions
+- **Webhooks** — Send real-time notifications to Slack, Discord, PagerDuty, or custom HTTP endpoints
 - **API Keys** — Generate scoped API keys for programmatic access to your databases
-- **Secure Storage** — Database passwords and API keys encrypted at rest with AES-256-GCM
+- **Secure** — CSRF protection, SSRF guard, AES-256-GCM encryption at rest, rate limiting, audit logs
+- **Self-Hosted** — Your data never leaves your server. Deploy with Docker in one command
 - **Dark Mode** — Eye-friendly dark theme with 6 built-in color presets and full customization
-- **Keyboard Shortcuts** — Navigate faster with Cmd+K command palette and global keyboard shortcuts
 
 ---
 
