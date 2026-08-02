@@ -3,7 +3,7 @@
 **Build admin panels and dashboards for any database — zero code, AI-powered.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![CI](https://github.com/dboard/dboard/actions/workflows/ci.yml/badge.svg)](https://github.com/dboard/dboard/actions)
+[![CI](https://github.com/Haimanot25/dboard/actions/workflows/ci.yml/badge.svg)](https://github.com/Haimanot25/dboard/actions)
 [![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue.svg)](https://typescriptlang.org)
 
@@ -75,7 +75,7 @@ Connect PostgreSQL, MySQL, MongoDB, SQLite, or Supabase — describe what you wa
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/dboard/dboard.git
+git clone https://github.com/Haimanot25/dboard.git
 cd dboard
 
 # 2. Install dependencies
@@ -1841,7 +1841,7 @@ All project documentation is maintained in the repository root:
 - **New here?** Start with [Quick Start](#quick-start) above
 - **API integration?** See [API Reference](#api-reference) with curl examples for all 80 endpoints
 - **Contributing?** Read [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow
-- **Found a bug?** [Open an issue](https://github.com/dboard/dboard/issues)
+- **Found a bug?** [Open an issue](https://github.com/Haimanot25/dboard/issues)
 - **Security concern?** Follow the process in [SECURITY.md](SECURITY.md)
 
 ---
@@ -1854,6 +1854,6 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 ## Support
 
-- **Issues:** [GitHub Issues](https://github.com/dboard/dboard/issues)
+- **Issues:** [GitHub Issues](https://github.com/Haimanot25/dboard/issues)
 - **Security:** See [SECURITY.md](SECURITY.md) for vulnerability reporting
 - **Contributing:** See [CONTRIBUTING.md](CONTRIBUTING.md)

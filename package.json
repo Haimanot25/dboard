@@ -6,11 +6,11 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/dboard/dboard.git"
+    "url": "https://github.com/Haimanot25/dboard.git"
   },
-  "homepage": "https://github.com/dboard/dboard#readme",
+  "homepage": "https://github.com/Haimanot25/dboard#readme",
   "bugs": {
-    "url": "https://github.com/dboard/dboard/issues"
+    "url": "https://github.com/Haimanot25/dboard/issues"
   },
   "author": "DBoard Contributors",
   "engines": {

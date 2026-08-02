@@ -85,7 +85,7 @@ const sections: DocSection[] = [
         <div>
           <h3 className="text-sm font-semibold mb-2">Installation</h3>
           <CodeBlock code={`# Clone and install
-git clone https://github.com/dboard/dboard.git
+git clone https://github.com/Haimanot25/dboard.git
 cd dboard
 npm install
 
@@ -583,10 +583,10 @@ export default function DocsPage() {
           <div className="border-t border-border pt-6 space-y-2">
             <h3 className="text-sm font-semibold">More Resources</h3>
             <ul className="text-xs space-y-1 text-muted-foreground">
-              <li><a href="https://github.com/dboard/dboard" target="_blank" rel="noopener noreferrer" className="hover:text-foreground inline-flex items-center gap-1">GitHub Repository <ExternalLink className="h-3 w-3" /></a></li>
-              <li><a href="https://github.com/dboard/dboard/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" className="hover:text-foreground inline-flex items-center gap-1">Contributing Guide <ExternalLink className="h-3 w-3" /></a></li>
-              <li><a href="https://github.com/dboard/dboard/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer" className="hover:text-foreground inline-flex items-center gap-1">Security Policy <ExternalLink className="h-3 w-3" /></a></li>
-              <li><a href="https://github.com/dboard/dboard/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="hover:text-foreground inline-flex items-center gap-1">Changelog <ExternalLink className="h-3 w-3" /></a></li>
+              <li><a href="https://github.com/Haimanot25/dboard" target="_blank" rel="noopener noreferrer" className="hover:text-foreground inline-flex items-center gap-1">GitHub Repository <ExternalLink className="h-3 w-3" /></a></li>
+              <li><a href="https://github.com/Haimanot25/dboard/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" className="hover:text-foreground inline-flex items-center gap-1">Contributing Guide <ExternalLink className="h-3 w-3" /></a></li>
+              <li><a href="https://github.com/Haimanot25/dboard/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer" className="hover:text-foreground inline-flex items-center gap-1">Security Policy <ExternalLink className="h-3 w-3" /></a></li>
+              <li><a href="https://github.com/Haimanot25/dboard/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" className="hover:text-foreground inline-flex items-center gap-1">Changelog <ExternalLink className="h-3 w-3" /></a></li>
             </ul>
           </div>
         </div>

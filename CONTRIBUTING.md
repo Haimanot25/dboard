@@ -7,7 +7,7 @@ Thank you for your interest in contributing to DBoard! This guide will help you 
 1. **Fork and clone the repository:**
 
 ```bash
-git clone https://github.com/dboard/dboard.git
+git clone https://github.com/Haimanot25/dboard.git
 cd dboard
 ```
 
